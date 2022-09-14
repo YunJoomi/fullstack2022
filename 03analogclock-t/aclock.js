@@ -1,21 +1,27 @@
-var hourHands = document.querySelector('[data-hour-hand')
-var minuteHand = document.querySelector('[data-minute-hand]')
-var secondHand = document.querySelector('[data-second-hand]')
+setInterval(setClock, 1000)
+
+var hourHands = document.getElementsByClassName("hand hour")  // 이렇게도 가능
+                                                            // 단 이경우 collection을 리턴함
+//const hourHand = document.querySelector('[data-hour-hand]')
+const minuteHand = document.querySelector('div .minute')
+const secondHand = document.querySelector('[data-second-hand]')
 
 function setClock(){
-    const currentDate = new Date();
-    const seondsRatio = currentDate.getSeconds() / 60
-    const minutesRatio = currentDate.getMinutes() / 60
-    const hoursRatio = currentDate.getHours() / 12
+    const currentDate = new Date()
+    const secondsRatio = currentDate.getSeconds() / 60
+    const minutesRatio = (secondsRatio + currentDate.getMinutes())/60
+    const hoursRatio = (minutesRatio + currentDate.getHours()) / 12
+    
 
-    SetRotation(hourHand, hoursRatio)
-    SetRotation(minuteHand, minutesRatio)
-    SetRotation(seondand, seondsRatio)
+    const hourHand = hourHands.item(0)
+    setRotation(hourHand, hoursRatio)
+    setRotation(minuteHand, minutesRatio)
+    setRotation(secondHand, secondsRatio)
+    
 }
 
-function SetRotation(element, rotationRatio){
-    element.style.setProperty('--rotation', rotationRatio)
+function setRotation(element, rotationRatio){
+    element.style.setProperty('--rotation', rotationRatio * 360)
 }
 
 setClock()
-setInterval(setClock, 1000)
