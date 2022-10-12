@@ -55,7 +55,7 @@ function getWeather() {
 }
 
 let openweather_basic =
-  "https://api.openweathermap.org/data/2.5/weather?units=metric&appid=7d96bc5108f52b80e2d9075a369b9f35";
+  "https://api.openweathermap.org/data/2.5/weather?appid=7d96bc5108f52b80e2d9075a369b9f35";
 
 let openweather_go = null;
 
@@ -85,7 +85,22 @@ button.onclick = function (e) {
   let cityinput = document.getElementById("city");
   cityname = cityinput.value;
   openweather_go = openweather_basic + "&q=" + cityname;
+
+  let tempinput = document.getElementById("tempunit")
+  tempunit = tempinput.value
+  openweather_go += "&units=" + tempunit
   getWeatherbycity();
 };
 
+const unitselect = document.getElementById("tempunit");
+unitselect.onchange = function (e) {
+  let cityinput = document.getElementById("city");
+  cityname = cityinput.value;
+  openweather_go = openweather_basic + "&q=" + cityname;
+
+  let tempinput = document.getElementById("tempunit");
+  tempunit = tempinput.value;
+  openweather_go += "&units=" + tempunit;
+  getWeatherbycity();
+};
 getWeather();
